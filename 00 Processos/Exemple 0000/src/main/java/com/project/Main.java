@@ -1,5 +1,7 @@
 package com.project;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 class Main {
 	public static void main (String ... args){
         new ThreadDemo("Info pel thread").start();
