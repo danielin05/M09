@@ -1,7 +1,12 @@
 package com.project;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ConcurrentHashMap<String, Integer> sharedData = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(3);
 
@@ -9,5 +14,8 @@ public class Main {
         executor.execute(new Task(new TaskWrite(), sharedData));
         executor.execute(new Task(new TaskModify(), sharedData));
         executor.execute(new Task(new TaskRead(), sharedData));
+
+        // Tancar l'executor
+        executor.shutdown();
     }
 }
